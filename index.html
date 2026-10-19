@@ -997,6 +997,170 @@
   }
 }
 
+/* =========================================
+   DEVIS TECH — IPHONE-STYLE DYNAMIC ISLAND
+========================================= */
+
+.dynamic-island {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 40px;
+  background: #050505;
+  color: #fff;
+  border: 1px solid #292929;
+  border-radius: 30px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .25);
+  transition:
+    width .55s cubic-bezier(.2, .8, .2, 1),
+    height .55s cubic-bezier(.2, .8, .2, 1),
+    border-radius .4s ease;
+}
+
+.dynamic-island.expanded {
+  width: min(370px, calc(100vw - 28px));
+  height: 132px;
+  border-radius: 28px;
+}
+
+.island-mini-time,
+.island-mini-dot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity .2s ease;
+}
+
+.island-mini-time {
+  left: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.island-mini-dot {
+  right: 18px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 10px rgba(255,255,255,.6);
+}
+
+.dynamic-island.expanded .island-mini-time,
+.dynamic-island.expanded .island-mini-dot {
+  opacity: 0;
+}
+
+.island-content {
+  width: 100%;
+  padding: 13px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+
+.dynamic-island.expanded .island-content {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: .12s;
+  pointer-events: auto;
+}
+
+.island-top,
+.island-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.island-brand {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.island-time {
+  color: #bdbdbd;
+  font-size: 11px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.island-message {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.island-bottom {
+  color: #bdbdbd;
+  font-size: 10px;
+}
+
+.island-status {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.island-whatsapp {
+  flex-shrink: 0;
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 11px;
+  pointer-events: auto;
+}
+
+.island-whatsapp:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .dynamic-island {
+    top: 8px;
+    height: 37px;
+  }
+
+  .dynamic-island.expanded {
+    height: 128px;
+  }
+
+  .island-content {
+    padding: 12px 15px;
+    gap: 8px;
+  }
+
+  .island-message {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dynamic-island,
+  .island-content,
+  .island-mini-time,
+  .island-mini-dot {
+    transition: none !important;
+  }
+}
+
 
 
 
@@ -1522,6 +1686,56 @@
     </svg>
   </a>
 
+`
+<!-- DEVIS TECH DYNAMIC ISLAND -->
+<div
+  class="dynamic-island"
+  id="dynamicIsland"
+  role="group"
+  aria-label="Devis Tech live information">
+
+  <button
+    type="button"
+    id="islandToggle"
+    aria-label="Expand Dynamic Island"
+    aria-expanded="false"
+    style="position:absolute;inset:0;width:100%;height:100%;
+    opacity:0;z-index:2;cursor:pointer;border:0;background:transparent;">
+  </button>
+
+  <span class="island-mini-time" id="islandMiniTime">--:--</span>
+  <span class="island-mini-dot"></span>
+
+  <div class="island-content">
+    <div class="island-top">
+      <span class="island-brand">DEVIS TECH</span>
+      <span class="island-time" id="islandTime">--:--:--</span>
+    </div>
+
+    <div
+      class="island-message"
+      id="islandMessage"
+      aria-live="polite">
+      Welcome to Devis Tech!
+    </div>
+
+    <div class="island-bottom">
+      <span class="island-status" id="islandStatus">
+        Creative technology. Endless possibilities.
+      </span>
+
+      <a
+        class="island-whatsapp"
+        href="https://wa.me/2348034407044"
+        target="_blank"
+        rel="noopener noreferrer">
+        WhatsApp ↗
+      </a>
+    </div>
+  </div>
+</div>
+<!-- END DYNAMIC ISLAND -->
+
   <script>
     // Mobile navigation
     const menuToggle = document.getElementById("menuToggle");
@@ -1740,6 +1954,161 @@ document.addEventListener("keydown", event => {
     closeChatbot();
   }
 });
+
+
+/* =========================================
+   DEVIS TECH DYNAMIC ISLAND FUNCTIONALITY
+========================================= */
+
+(() => {
+  const island = document.getElementById("dynamicIsland");
+  const toggle = document.getElementById("islandToggle");
+  const timeDisplay = document.getElementById("islandTime");
+  const miniTimeDisplay = document.getElementById("islandMiniTime");
+  const messageDisplay = document.getElementById("islandMessage");
+  const statusDisplay = document.getElementById("islandStatus");
+
+  if (
+    !island ||
+    !toggle ||
+    !timeDisplay ||
+    !miniTimeDisplay ||
+    !messageDisplay ||
+    !statusDisplay
+  ) return;
+
+  const greetings = [
+    {
+      message: "Welcome to Devis Tech! 👋",
+      status: "Creativity meets technology."
+    },
+    {
+      message: "Need a professional website?",
+      status: "Let's bring your idea online."
+    },
+    {
+      message: "Design. Code. Create. Innovate.",
+      status: "Your vision, made digital."
+    },
+    {
+      message: "Let's connect on WhatsApp!",
+      status: "Chat with us: 08034407044"
+    },
+    {
+      message: "Beautiful graphics, powerful websites.",
+      status: "Creative solutions for your brand."
+    },
+    {
+      message: "AI creativity and digital innovation.",
+      status: "Ideas transformed into experiences."
+    },
+    {
+      message: "Photo and video editing available.",
+      status: "Make your content stand out."
+    },
+    {
+      message: "Thanks for visiting Devis Tech!",
+      status: "Explore our projects and services."
+    },
+    {
+      message: "Ready to start a project?",
+      status: "Tap WhatsApp to discuss your idea."
+    },
+    {
+      message: "Your digital journey starts here.",
+      status: "Websites • Design • Creative Media"
+    }
+  ];
+
+  let greetingIndex = 0;
+  let manuallyControlled = false;
+  let autoCollapseTimeout;
+  let nextGreetingTimeout;
+
+  function updateClock() {
+    const now = new Date();
+
+    timeDisplay.textContent = now.toLocaleTimeString("en-NG", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    });
+
+    miniTimeDisplay.textContent = now.toLocaleTimeString("en-NG", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    });
+  }
+
+  function showGreeting() {
+    const greeting = greetings[greetingIndex];
+
+    messageDisplay.textContent = greeting.message;
+    statusDisplay.textContent = greeting.status;
+
+    greetingIndex = (greetingIndex + 1) % greetings.length;
+  }
+
+  function expandIsland() {
+    island.classList.add("expanded");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Collapse Dynamic Island");
+  }
+
+  function shrinkIsland() {
+    island.classList.remove("expanded");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Expand Dynamic Island");
+  }
+
+  function pulseIsland() {
+    if (manuallyControlled || document.hidden) return;
+
+    expandIsland();
+
+    clearTimeout(autoCollapseTimeout);
+
+    autoCollapseTimeout = setTimeout(() => {
+      if (!manuallyControlled) shrinkIsland();
+    }, 3500);
+  }
+
+  toggle.addEventListener("click", () => {
+    manuallyControlled = true;
+    clearTimeout(autoCollapseTimeout);
+
+    if (island.classList.contains("expanded")) {
+      shrinkIsland();
+    } else {
+      expandIsland();
+    }
+  });
+
+  updateClock();
+  showGreeting();
+
+  // Update the time every second.
+  setInterval(updateClock, 1000);
+
+  // Rotate greetings and information.
+  setInterval(showGreeting, 4000);
+
+  // Initial welcome animation.
+  setTimeout(pulseIsland, 900);
+
+  // Periodically expand and shrink like a Dynamic Island.
+  setInterval(pulseIsland, 12000);
+
+  // Resume automatic animation when the visitor returns.
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !manuallyControlled) {
+      pulseIsland();
+    }
+  });
+})();
+
   </script>
 
 </body>
