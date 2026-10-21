@@ -1204,6 +1204,115 @@
     @media (max-width:850px) { .case-grid, .trust-grid { grid-template-columns:1fr; } .nav-tools { margin-left:auto; } }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation:none; } }
 
+  
+    /* RESPONSIVE LAYOUT: phones, tablets, laptops, and wide screens */
+    html { width:100%; max-width:100%; overflow-x:clip; scroll-padding-top:90px; }
+    body { width:100%; min-width:0; overflow-x:clip; }
+    img, video, iframe, canvas, svg { max-width:100%; }
+    img { height:auto; }
+    .container { width:min(1160px, calc(100% - 40px)); }
+    main, section, header, footer { min-width:0; }
+    .nav-tools { flex-shrink:0; }
+    .nav-links { min-width:0; }
+    .hero-content, .about-copy, .about-box, .service, .skill, .project, .case-card, .trust-card, .contact-copy, .contact-form { min-width:0; }
+    .hero h1 { font-size:clamp(2.65rem, 7.8vw, 6.8rem); overflow-wrap:anywhere; }
+    .hero p, .section-intro, .about-copy p, .service p, .project p, .case-card p { overflow-wrap:anywhere; }
+    .about-grid, .contact-grid, .services-grid, .projects-grid, .skills-grid, .process-grid, .case-grid, .trust-grid { min-width:0; }
+    .project a, .footer-links a { overflow-wrap:anywhere; }
+    .contact-detail img { display:block; width:auto; max-width:100%; height:auto !important; object-fit:contain; }
+    .contact-form input, .contact-form textarea { min-width:0; max-width:100%; }
+    .btn { max-width:100%; white-space:normal; text-align:center; }
+    .chatbot-window { right:max(12px, env(safe-area-inset-right)); bottom:max(90px, env(safe-area-inset-bottom)); max-width:calc(100vw - 24px); max-height:calc(100dvh - 120px); }
+    .chatbot-launcher { right:max(14px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); width:54px; height:54px; }
+    .whatsapp-float { right:max(14px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); }
+    .chatbot-launcher { bottom:calc(max(16px, env(safe-area-inset-bottom)) + 70px); }
+    .dynamic-island { max-width:calc(100vw - 24px); }
+    .island-content { min-width:0; }
+    .island-message { overflow-wrap:anywhere; }
+    button, a, input, textarea { touch-action:manipulation; }
+    @media (min-width: 1200px) {
+      .container { width:min(1160px, calc(100% - 64px)); }
+      .hero { min-height:min(720px, 82vh); }
+    }
+    @media (max-width: 850px) {
+      .container { width:calc(100% - 36px); }
+      nav { min-height:72px; gap:12px; flex-wrap:nowrap; }
+      .logo { font-size:1.25rem; }
+      .nav-tools { gap:8px; }
+      .theme-toggle { width:40px; height:40px; flex:0 0 40px; }
+      .menu-toggle { white-space:nowrap; }
+      .nav-links { top:72px; max-height:calc(100dvh - 72px); overflow-y:auto; }
+      .hero { min-height:0; padding:100px 0 82px; }
+      .hero::before { width:360px; height:360px; right:-260px; }
+      .about-grid { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; }
+      .services-grid, .projects-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .skills-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .process-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .contact-grid { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; }
+      .contact-form { padding:24px; }
+      section.content-section { padding:76px 0; }
+      .section-top { align-items:flex-start; }
+      .trust-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .container { width:calc(100% - 30px); }
+      nav { min-height:66px; }
+      .logo { font-size:1.08rem; letter-spacing:-.6px; }
+      .nav-tools { gap:6px; }
+      .theme-toggle { width:36px; height:36px; flex-basis:36px; }
+      .menu-toggle { padding:8px 9px; font-size:.82rem; }
+      .nav-links { top:66px; padding:20px 15px; max-height:calc(100dvh - 66px); }
+      .hero { padding:88px 0 68px; }
+      .hero h1 { font-size:clamp(2.45rem, 12vw, 4.4rem); letter-spacing:-1.8px; line-height:1.04; }
+      .hero p { font-size:1rem; }
+      .eyebrow { font-size:.68rem; letter-spacing:1.2px; padding:6px 10px; margin-bottom:20px; }
+      .buttons { align-items:stretch; }
+      .buttons .btn { flex:1 1 100%; }
+      section.content-section { padding:58px 0; }
+      .section-top { margin-bottom:30px; }
+      h2 { font-size:clamp(1.9rem, 9vw, 2.8rem); letter-spacing:-1.2px; }
+      .section-intro { font-size:.95rem; }
+      .about-grid, .contact-grid, .services-grid, .projects-grid, .skills-grid, .process-grid, .case-grid, .trust-grid { grid-template-columns:minmax(0,1fr); }
+      .about-grid { gap:25px; }
+      .about-box, .case-card, .trust-card { padding:22px; }
+      .service { padding:23px; }
+      .project { min-height:0; padding:24px; }
+      .project-tag { margin-bottom:22px; }
+      .skill { padding:17px; }
+      .process-grid { gap:22px; }
+      .contact-form { padding:20px; }
+      .contact-detail img { max-height:220px; object-fit:contain; object-position:left; }
+      .footer-inner { align-items:flex-start; }
+      .footer-links { flex-wrap:wrap; gap:12px 18px; }
+      .chatbot-window { right:12px; bottom:84px; width:calc(100vw - 24px); height:min(500px, calc(100dvh - 110px)); max-height:calc(100dvh - 110px); }
+      .chatbot-launcher { right:14px; bottom:calc(16px + env(safe-area-inset-bottom)); width:50px; height:50px; }
+      .whatsapp-float { right:14px; bottom:calc(16px + env(safe-area-inset-bottom)); width:50px; height:50px; }
+      .whatsapp-float svg { width:29px; height:29px; }
+      .chatbot-launcher { bottom:calc(76px + env(safe-area-inset-bottom)); }
+      .dynamic-island.expanded { width:calc(100vw - 24px); }
+      .island-content { padding:11px 13px; }
+      .island-brand { letter-spacing:.8px; }
+      .island-message { font-size:13px; }
+      .island-bottom { gap:6px; }
+      .island-status { max-width:65%; }
+    }
+    @media (max-width: 360px) {
+      .container { width:calc(100% - 24px); }
+      .logo { font-size:.98rem; }
+      .menu-toggle { font-size:.76rem; padding:7px; }
+      .theme-toggle { width:32px; height:32px; flex-basis:32px; }
+      .hero h1 { font-size:clamp(2.15rem, 11.5vw, 2.8rem); }
+      .project-stack span { font-size:.68rem; }
+      .chatbot-quick-questions { gap:5px; padding:9px; }
+      .chatbot-quick-questions button { font-size:.7rem; padding:6px 8px; }
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height:0; padding:76px 0 44px; }
+      .dynamic-island.expanded { height:118px; }
+      .chatbot-window { height:calc(100dvh - 24px); max-height:calc(100dvh - 24px); bottom:12px; }
+      .nav-links { max-height:calc(100dvh - 66px); }
+    }
+
   </style>
   
 </head>
