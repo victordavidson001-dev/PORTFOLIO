@@ -2182,6 +2182,7 @@ document.addEventListener("keydown", event => {
       try { return localStorage.getItem("devis-tech-theme"); } catch (error) { return null; }
     })();
     if (savedTheme === "dark") document.body.classList.add("dark-theme");
+    if (themeToggle) {
     function updateThemeButton() {
       const dark = document.body.classList.contains("dark-theme");
       themeToggle.textContent = dark ? "☀" : "☾";
@@ -2194,6 +2195,7 @@ document.addEventListener("keydown", event => {
       try { localStorage.setItem("devis-tech-theme", document.body.classList.contains("dark-theme") ? "dark" : "light"); } catch (error) {}
       updateThemeButton();
     });
+    }
 
     // Download a clean, editable text CV using only confirmed portfolio details.
     document.getElementById("downloadCv").addEventListener("click", () => {
