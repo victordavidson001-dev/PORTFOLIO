@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <meta property="og:title" content="Devis Tech | Digital Portfolio">
+  <meta property="og:description" content="Frontend development, graphic design, AI creativity, and digital media by Devis Tech.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23090909'/%3E%3Ctext x='50' y='65' font-size='45' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'%3EDT%3C/text%3E%3C/svg%3E">
   <meta name="description" content="Devis Tech — Web development, graphic design, AI creativity and media editing.">
   <title>Devis Tech | Digital Portfolio</title>
 
@@ -1165,6 +1170,40 @@
 
 
     
+  
+    /* ADDED PORTFOLIO ENHANCEMENTS */
+    .nav-tools { display:flex; align-items:center; gap:10px; }
+    .theme-toggle { width:42px; height:42px; border:1px solid #ddd; border-radius:50%; background:#fff; color:#111; cursor:pointer; font-size:1.15rem; }
+    .theme-toggle:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline:3px solid #777; outline-offset:3px; }
+    .project-stack { display:flex; flex-wrap:wrap; gap:7px; margin-top:18px; }
+    .project-stack span { border:1px solid #444; border-radius:20px; padding:4px 9px; color:#ddd; font-size:.72rem; }
+    .project-note { margin-top:22px; color:#aaa; font-size:.88rem; }
+    .case-grid, .trust-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .case-card, .trust-card { border:1px solid var(--line); background:var(--white); padding:28px; }
+    .case-number, .trust-card > span { display:block; color:#888; font-size:.75rem; font-weight:800; letter-spacing:2px; margin-bottom:16px; }
+    .case-card h3, .trust-card h3 { font-size:1.25rem; margin-bottom:14px; }
+    .case-card p, .trust-card p { color:var(--muted); margin:10px 0; }
+    .case-status { display:inline-block; margin-top:12px; padding:5px 10px; border:1px solid var(--line); border-radius:20px; font-size:.78rem; }
+    .trust-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .availability { display:flex; align-items:center; gap:9px; font-weight:700; }
+    .availability-dot { display:inline-block; width:9px; height:9px; border-radius:50%; background:#2d9d60; box-shadow:0 0 0 4px rgba(45,157,96,.12); }
+    body.dark-theme { background:#101010; color:#f5f5f5; --white:#171717; --grey:#1e1e1e; --muted:#b9b9b9; --line:#333; }
+    body.dark-theme header { background:rgba(17,17,17,.94); border-color:#333; }
+    body.dark-theme .nav-links a { color:#e5e5e5; }
+    body.dark-theme .nav-cta, body.dark-theme .btn-black { background:#f5f5f5; color:#111 !important; }
+    body.dark-theme .theme-toggle, body.dark-theme .menu-toggle { background:#222; color:#fff; border-color:#444; }
+    body.dark-theme .marquee { background:#1b1b1b; border-color:#333; }
+    body.dark-theme .about-box, body.dark-theme .service, body.dark-theme .skill, body.dark-theme .case-card, body.dark-theme .trust-card { background:#191919; border-color:#333; color:#f5f5f5; }
+    body.dark-theme .about-point { border-color:#333; }
+    body.dark-theme .contact-form { background:#191919; border-color:#333; }
+    body.dark-theme input, body.dark-theme textarea { background:#111; color:#f5f5f5; border-color:#444; }
+    body.dark-theme .skills-section, body.dark-theme .contact-section { background:#141414; }
+    body.dark-theme .projects-section { background:#080808; }
+    body.dark-theme .nav-links { background:#111; border-color:#333; }
+    body.dark-theme .section-intro, body.dark-theme .about-copy p, body.dark-theme .service p, body.dark-theme .case-card p, body.dark-theme .trust-card p { color:#bbb; }
+    @media (max-width:850px) { .case-grid, .trust-grid { grid-template-columns:1fr; } .nav-tools { margin-left:auto; } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation:none; } }
+
   </style>
   
 </head>
@@ -1209,6 +1248,7 @@
 
         <div class="buttons">
           <a href="#projects" class="btn btn-light">Explore My Work ↗</a>
+          <button type="button" class="btn btn-dark-outline" id="downloadCv">Download CV ↓</button>
 
           <a href="https://wa.me/2348034407044?text=Hello%20Devis%20Tech%2C%20I%20would%20like%20to%20discuss%20a%20project."
             class="btn btn-dark-outline" target="_blank" rel="noopener noreferrer">
@@ -1412,46 +1452,56 @@
     <section class="content-section projects-section" id="projects">
       <div class="container">
         <div class="section-top reveal">
-          <div>
-            <span class="section-label">04 / Portfolio</span>
-            <h2>Selected work<br>& creative concepts.</h2>
-          </div>
-
-          <p class="section-intro">
-            Use this section to present your websites, design work,
-            and digital projects to potential clients.
-          </p>
+          <div><span class="section-label">04 / Featured Projects</span><h2>Selected work<br>& projects in progress.</h2></div>
+          <p class="section-intro">A growing collection of web development and digital product work. Project status is shown clearly so visitors know what is live and what is still being built.</p>
         </div>
-
         <div class="projects-grid">
           <article class="project reveal">
-            <span class="project-tag">WEB DEVELOPMENT</span>
-            <h3>Business Website</h3>
-            <p>
-              A clean, responsive online presence designed to present
-              a business, its services, and contact information.
-            </p>
-            <a href="#contact">Build something similar ↗</a>
+            <span class="project-tag">LIVE WEBSITE · PORTFOLIO</span><h3>Devis Tech Portfolio</h3>
+            <p>A responsive portfolio for presenting web development, graphic design, AI creativity, and media editing services. Includes a contact form that opens WhatsApp and an on-page assistant.</p>
+            <div class="project-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a href="https://victordavidson001-dev.github.io/PORTFOLIO/" target="_blank" rel="noopener noreferrer">View live website ↗</a>
+            <a href="https://github.com/victordavidson001-dev/PORTFOLIO" target="_blank" rel="noopener noreferrer">View source code ↗</a>
           </article>
-
           <article class="project reveal">
-            <span class="project-tag">GRAPHIC DESIGN</span>
-            <h3>Visual Identity</h3>
-            <p>
-              Creative graphics for brand communication, promotions,
-              digital campaigns, and social media.
-            </p>
-            <a href="#contact">Discuss a design ↗</a>
+            <span class="project-tag">WEB APPLICATION · IN DEVELOPMENT</span><h3>Converse Chat App</h3>
+            <p>A real-time messaging platform concept focused on conversations, user profiles, and voice/video calling. Features are being developed and tested.</p>
+            <div class="project-stack"><span>HTML/CSS/JS</span><span>Firebase</span><span>WebRTC</span></div>
+            <a href="https://converse-pbl9yr.v2.appdeploy.ai/" target="_blank" rel="noopener noreferrer">Open app preview ↗</a>
+            <a href="#contact">Discuss a similar app ↗</a>
           </article>
-
           <article class="project reveal">
-            <span class="project-tag">WEB APPLICATION</span>
-            <h3>Digital Platform</h3>
-            <p>
-              A modern application concept with a clear interface,
-              useful features, and responsive layouts.
-            </p>
-            <a href="#contact">Start a project ↗</a>
+            <span class="project-tag">WEB DESIGN · CASE STUDY</span><h3>Ministry Website Concept</h3>
+            <p>A church website concept for sharing sermons, ministry updates, prayer requests, and service information in one accessible place.</p>
+            <div class="project-stack"><span>UI Design</span><span>JavaScript</span><span>Firebase planned</span></div>
+            <a href="#case-studies">Read project approach ↓</a><a href="#contact">Discuss a website ↗</a>
+          </article>
+        </div>
+        <p class="project-note">Some projects are works in progress. Features and availability may change while development continues.</p>
+      </div>
+    </section>
+
+    <!-- PROJECT CASE STUDIES -->
+    <section class="content-section" id="case-studies">
+      <div class="container">
+        <div class="section-top reveal">
+          <div><span class="section-label">05 / Project Approach</span><h2>How I approach<br>real-world problems.</h2></div>
+          <p class="section-intro">Short case studies show the problem, approach, and intended outcome—not just the visual design.</p>
+        </div>
+        <div class="case-grid">
+          <article class="case-card reveal">
+            <span class="case-number">CASE STUDY 01</span><h3>Converse — Real-time communication</h3>
+            <p><strong>Goal:</strong> Create a simple messaging experience that feels immediate and works across devices.</p>
+            <p><strong>Approach:</strong> Build a clear conversation interface, connect message updates to a real-time backend, and test call permissions and media streams separately.</p>
+            <p><strong>Focus:</strong> Reliable message delivery, readable chat layout, responsive screens, and honest status feedback while features are being tested.</p>
+            <span class="case-status">Status: In development</span>
+          </article>
+          <article class="case-card reveal">
+            <span class="case-number">CASE STUDY 02</span><h3>Ministry platform — Information in one place</h3>
+            <p><strong>Goal:</strong> Help visitors find sermons, prayer request options, service schedules, and ministry announcements easily.</p>
+            <p><strong>Approach:</strong> Organise the public pages around the visitor's needs and keep publishing tools separate from the public-facing experience.</p>
+            <p><strong>Focus:</strong> Simple navigation, mobile usability, clear content, and dependable publishing workflows.</p>
+            <span class="case-status">Status: Concept / ongoing work</span>
           </article>
         </div>
       </div>
@@ -1500,6 +1550,21 @@
       </div>
     </section>
 
+    <!-- CLIENT TRUST / TESTIMONIALS -->
+    <section class="content-section" id="feedback">
+      <div class="container">
+        <div class="section-top reveal">
+          <div><span class="section-label">06 / Working Together</span><h2>Clear communication.<br>Thoughtful delivery.</h2></div>
+          <p class="section-intro">I’m building a portfolio of client work. Rather than publish invented testimonials, I’ll add genuine client feedback here with permission.</p>
+        </div>
+        <div class="trust-grid">
+          <article class="trust-card reveal"><span>01</span><h3>Understand the brief</h3><p>We agree on the goal, requirements, and what a successful result should do.</p></article>
+          <article class="trust-card reveal"><span>02</span><h3>Keep you updated</h3><p>Progress, questions, and important limitations are communicated clearly.</p></article>
+          <article class="trust-card reveal"><span>03</span><h3>Review and improve</h3><p>We check the result together and identify any final refinements.</p></article>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section class="content-section contact-section" id="contact">
       <div class="container">
@@ -1518,6 +1583,7 @@
         <div class="contact-grid">
           <div class="contact-copy reveal">
             <h3>Let's work together.</h3>
+            <p class="availability"><span class="availability-dot"></span> Open to project enquiries</p>
 
             <p>
               For website development, graphic design, AI creativity,
@@ -1888,7 +1954,7 @@ function getChatbotResponse(question) {
   }
 
   if (/\b(project|projects|portfolio|previous work|examples|sample)\b/.test(q)) {
-    return "The portfolio showcases concepts for a business website, a visual identity, and a digital platform. You can explore the Projects section on this page. For specific examples or project enquiries, contact Devis Tech on WhatsApp.";
+    return "The portfolio includes the Devis Tech website and project concepts such as Converse, a messaging app in development, and a ministry information platform concept. Open the Featured Projects and Case Studies sections for details. Some projects are still in progress.";
   }
 
   if (/\b(price|prices|cost|how much|charge|charges|fee|budget|quotation)\b/.test(q)) {
@@ -2108,6 +2174,64 @@ document.addEventListener("keydown", event => {
     }
   });
 })();
+
+
+    // Theme toggle: remembers the visitor's choice in this browser.
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme = (() => {
+      try { return localStorage.getItem("devis-tech-theme"); } catch (error) { return null; }
+    })();
+    if (savedTheme === "dark") document.body.classList.add("dark-theme");
+    function updateThemeButton() {
+      const dark = document.body.classList.contains("dark-theme");
+      themeToggle.textContent = dark ? "☀" : "☾";
+      themeToggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+      themeToggle.title = dark ? "Switch to light theme" : "Switch to dark theme";
+    }
+    updateThemeButton();
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+      try { localStorage.setItem("devis-tech-theme", document.body.classList.contains("dark-theme") ? "dark" : "light"); } catch (error) {}
+      updateThemeButton();
+    });
+
+    // Download a clean, editable text CV using only confirmed portfolio details.
+    document.getElementById("downloadCv").addEventListener("click", () => {
+      const cv = [
+        "DEVIS TECH",
+        "Frontend Developer | Digital Creative",
+        "Portfolio: https://victordavidson001-dev.github.io/PORTFOLIO/",
+        "GitHub: https://github.com/victordavidson001-dev",
+        "WhatsApp: +234 803 440 7044",
+        "",
+        "PROFESSIONAL PROFILE",
+        "Frontend developer and digital creative working on responsive websites, web application interfaces, graphic design, AI-assisted visuals, photo editing, and video editing.",
+        "",
+        "TECHNICAL AND CREATIVE SKILLS",
+        "HTML5, CSS3, JavaScript, Firebase, responsive web design, Canva design, AI tools, photo editing, and video editing.",
+        "",
+        "FEATURED PROJECTS",
+        "Devis Tech Portfolio — responsive portfolio website with project information, WhatsApp enquiry form, and a portfolio assistant.",
+        "Converse — real-time messaging application concept in development, exploring messaging, profiles, and voice/video calling.",
+        "Ministry Website Concept — website concept for sermons, prayer requests, service schedules, and ministry announcements.",
+        "",
+        "SERVICES",
+        "Frontend website development; graphic design; AI-assisted creative visuals; photo editing; video editing; digital solutions.",
+        "",
+        "CONTACT",
+        "WhatsApp: +234 803 440 7044",
+        "Please add your education, work history, certifications, and any additional verified achievements before sending this CV to employers."
+      ].join("\n");
+      const blob = new Blob([cv], {type:"text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Devis-Tech-CV.txt";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
 
   </script>
 
